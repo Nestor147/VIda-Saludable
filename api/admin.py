@@ -1,0 +1,12 @@
+from django.contrib import admin
+from .models import Usuario, Alimentacion, Agua, Esperanza, Sol, Aire, Sleep, Despertar, Ejercicio
+
+admin.site.register(Usuario)
+admin.site.register(Alimentacion)
+admin.site.register(Agua)
+admin.site.register(Esperanza)
+admin.site.register(Sol)
+admin.site.register(Aire)
+admin.site.register(Sleep)
+admin.site.register(Despertar)
+admin.site.register(Ejercicio)
