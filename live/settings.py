@@ -1,3 +1,4 @@
+
 """
 Django settings for live project.
 
@@ -95,12 +96,13 @@ WSGI_APPLICATION = 'live.wsgi.application'
 
 DATABASES = {
      'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'vida_saludable',
-        'USER': 'root',
-        'PASSWORD': '',
-        'PORT': '3306',  # O el puerto que estés utilizando
+        'USER': 'postgres',
+        'PASSWORD': '123456',
         'HOST': 'localhost',  # O la dirección IP de tu servidor MySQL
+        'PORT': '5432',  # O el puerto que estés utilizando
+
         # 'PORT': '3306',  # O el puerto que estés utilizando
         #   'OPTIONS': {
         #     'charset': 'utf8mb4',

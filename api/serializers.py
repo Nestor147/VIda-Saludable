@@ -1,10 +1,15 @@
 from rest_framework import serializers
-from .models import Usuario, Alimentacion, Agua, Esperanza, Sol, Aire, Sleep, Despertar, Ejercicio
+from .models import Role, Usuario, Alimentacion, Agua, Esperanza, Sol, Aire, Sleep, Despertar, Ejercicio
+
+class RoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Role
+        fields = '__all__'
 
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
-        fields = ['id', 'name', 'last_name', 'phone', 'email', 'password_hash', 'created_at', 'updated_at']
+        fields = '__all__'
 
 class AlimentacionSerializer(serializers.ModelSerializer):
     class Meta:

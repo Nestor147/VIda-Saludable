@@ -1,78 +1,45 @@
-from rest_framework import generics
-from .models import Usuario, Alimentacion, Agua, Esperanza, Sol, Aire, Sleep, Despertar, Ejercicio
-from .serializers import (
-    UsuarioSerializer, AlimentacionSerializer, AguaSerializer, EsperanzaSerializer,
-    SolSerializer, AireSerializer, SleepSerializer, DespertarSerializer, EjercicioSerializer
-)
+from rest_framework import viewsets
+from .models import Role, Usuario, Alimentacion, Agua, Esperanza, Sol, Aire, Sleep, Despertar, Ejercicio
+from .serializers import (RoleSerializer, UsuarioSerializer, AlimentacionSerializer, AguaSerializer, 
+                          EsperanzaSerializer, SolSerializer, AireSerializer, SleepSerializer, 
+                          DespertarSerializer, EjercicioSerializer)
 
-class UsuarioListCreate(generics.ListCreateAPIView):
+class RoleViewSet(viewsets.ModelViewSet):
+    queryset = Role.objects.all()
+    serializer_class = RoleSerializer
+
+class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
 
-class UsuarioDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Usuario.objects.all()
-    serializer_class = UsuarioSerializer
-
-class AlimentacionListCreate(generics.ListCreateAPIView):
+class AlimentacionViewSet(viewsets.ModelViewSet):
     queryset = Alimentacion.objects.all()
     serializer_class = AlimentacionSerializer
 
-class AlimentacionDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Alimentacion.objects.all()
-    serializer_class = AlimentacionSerializer
-
-class AguaListCreate(generics.ListCreateAPIView):
+class AguaViewSet(viewsets.ModelViewSet):
     queryset = Agua.objects.all()
     serializer_class = AguaSerializer
 
-class AguaDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Agua.objects.all()
-    serializer_class = AguaSerializer
-
-class EsperanzaListCreate(generics.ListCreateAPIView):
+class EsperanzaViewSet(viewsets.ModelViewSet):
     queryset = Esperanza.objects.all()
     serializer_class = EsperanzaSerializer
 
-class EsperanzaDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Esperanza.objects.all()
-    serializer_class = EsperanzaSerializer
-
-class SolListCreate(generics.ListCreateAPIView):
+class SolViewSet(viewsets.ModelViewSet):
     queryset = Sol.objects.all()
     serializer_class = SolSerializer
 
-class SolDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Sol.objects.all()
-    serializer_class = SolSerializer
-
-class AireListCreate(generics.ListCreateAPIView):
+class AireViewSet(viewsets.ModelViewSet):
     queryset = Aire.objects.all()
     serializer_class = AireSerializer
 
-class AireDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Aire.objects.all()
-    serializer_class = AireSerializer
-
-class SleepListCreate(generics.ListCreateAPIView):
+class SleepViewSet(viewsets.ModelViewSet):
     queryset = Sleep.objects.all()
     serializer_class = SleepSerializer
 
-class SleepDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Sleep.objects.all()
-    serializer_class = SleepSerializer
-
-class DespertarListCreate(generics.ListCreateAPIView):
+class DespertarViewSet(viewsets.ModelViewSet):
     queryset = Despertar.objects.all()
     serializer_class = DespertarSerializer
 
-class DespertarDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Despertar.objects.all()
-    serializer_class = DespertarSerializer
-
-class EjercicioListCreate(generics.ListCreateAPIView):
-    queryset = Ejercicio.objects.all()
-    serializer_class = EjercicioSerializer
-
-class EjercicioDetail(generics.RetrieveUpdateDestroyAPIView):
+class EjercicioViewSet(viewsets.ModelViewSet):
     queryset = Ejercicio.objects.all()
     serializer_class = EjercicioSerializer
