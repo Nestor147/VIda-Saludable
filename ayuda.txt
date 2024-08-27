@@ -1,0 +1,34 @@
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import (
+    RoleViewSet, UsuarioViewSet, AlimentacionViewSet, AguaViewSet, EsperanzaViewSet, 
+    SolViewSet, AireViewSet, DormirViewSet, DespertarViewSet, EjercicioViewSet, ProyectoViewSet, UsuarioProyectoViewSet, DatosUsuarioViewSet
+)
+from .viewIndicator import HealthIndicatorsAPIView
+
+router = DefaultRouter()
+router.register(r'roles', RoleViewSet)
+router.register(r'usuarios', UsuarioViewSet)
+router.register(r'alimentaciones', AlimentacionViewSet)
+router.register(r'aguas', AguaViewSet)
+router.register(r'esperanzas', EsperanzaViewSet)
+router.register(r'soles', SolViewSet)
+router.register(r'aires', AireViewSet)
+router.register(r'sleeps', DormirViewSet)
+router.register(r'despertares', DespertarViewSet)
+router.register(r'ejercicios', EjercicioViewSet)
+router.register(r'proyectos', ProyectoViewSet)
+router.register(r'usuario-proyectos', UsuarioProyectoViewSet)
+router.register(r'datos-iniciales', DatosUsuarioViewSet)
+
+
+# urlpatterns += router.urls
+urlpatterns = router.urls
+
+
+urlpatterns = [
+    path('token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('register/', RegisterView.as_view(), name='register'),
+]
+
+urlpatterns += router.urls
