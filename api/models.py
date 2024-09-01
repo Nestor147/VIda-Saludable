@@ -41,9 +41,15 @@ class UsuarioProyecto(models.Model):
 
 class Alimentacion(models.Model):
     fecha = models.DateField()
-    hora = models.TimeField()
-    tipo_alimento = models.CharField(max_length=100)  # desayuno, almuerzo, cena, otro
-    saludable = models.CharField(max_length=50, blank=True, null=True)
+    desayuno_hora = models.TimeField()
+    almuerzo_hora = models.TimeField()
+    cena_hora = models.TimeField()
+    desayuno = models.CharField(max_length=100)  # desayuno, almuerzo, cena, otro
+    almuerzo = models.CharField(max_length=100)  # desayuno, almuerzo, cena, otro
+    cena = models.CharField(max_length=100)  # desayuno, almuerzo, cena, otro
+    desayuno_saludable = models.CharField(max_length=50, blank=True, null=True)
+    almuerzo_saludable = models.CharField(max_length=50, blank=True, null=True)
+    cena_saludable = models.CharField(max_length=50, blank=True, null=True)
     user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     def __str__(self):

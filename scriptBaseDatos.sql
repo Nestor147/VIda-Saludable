@@ -39,9 +39,15 @@ CREATE TABLE usuarios_proyecto (
 CREATE TABLE alimentacion (
     id SERIAL PRIMARY KEY,
     fecha DATE NOT NULL,
-    hora TIME NOT NULL,
-    tipo_alimento VARCHAR(100) NOT NULL, // //  desayuno, almuerzo, cena otro solo esos podran ser elejidos
-    saludable VARCHAR(50),
+    desayuno_hora TIME NOT NULL,
+    almuerzo_hora TIME,
+    cena_hora TIME,
+    desayuno VARCHAR(100), // //  desayuno, almuerzo, cena otro solo esos podran ser elejidos
+    almuerzo VARCHAR(100), // //  desayuno, almuerzo, cena otro solo esos podran ser elejidos
+    cena VARCHAR(100), // //  desayuno, almuerzo, cena otro solo esos podran ser elejidos
+    desayuno_saludable VARCHAR(50),
+    almuerzo_saludable VARCHAR(50),
+    cena_saludable VARCHAR(50),
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
