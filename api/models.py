@@ -24,7 +24,7 @@ class Proyecto(models.Model):
     descripcion = models.TextField(blank=True, null=True)
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField(blank=True, null=True)
-    estado = models.BooleanField(default=False, blank=True, null=True) 
+    estado = models.IntegerField()
 
 
 
@@ -48,13 +48,13 @@ class Alimentacion(models.Model):
     desayuno_hora = models.TimeField()
     almuerzo_hora = models.TimeField()
     cena_hora = models.TimeField()
-    desayuno = models.BooleanField(default=False)  # Indica si hubo desayuno
-    almuerzo = models.BooleanField(default=False)  # Indica si hubo almuerzo
-    cena = models.BooleanField(default=False)      # Indica si hubo cena
+    desayuno = models.IntegerField()  # Indica si hubo desayuno
+    almuerzo = models.IntegerField()  # Indica si hubo almuerzo
+    cena = models.IntegerField()      # Indica si hubo cena
     # Cambiar los campos de string a booleanos para indicar si fue saludable
-    desayuno_saludable = models.BooleanField(default=False, blank=True, null=True)  
-    almuerzo_saludable = models.BooleanField(default=False, blank=True, null=True)
-    cena_saludable = models.BooleanField(default=False, blank=True, null=True)
+    desayuno_saludable = models.IntegerField() 
+    almuerzo_saludable = models.IntegerField()
+    cena_saludable = models.IntegerField()
     user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -111,7 +111,7 @@ class Dormir(models.Model):
 class Despertar(models.Model):
     fecha = models.DateField()
     hora = models.TimeField()
-    estado = models.BooleanField(default=False) 
+    estado = models.IntegerField()
     user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     def __str__(self):
