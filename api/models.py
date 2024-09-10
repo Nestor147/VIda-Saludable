@@ -22,8 +22,10 @@ class Usuario(models.Model):
 class Proyecto(models.Model):
     nombre = models.CharField(max_length=100, unique=True)
     descripcion = models.TextField(blank=True, null=True)
+    estado = models.BooleanField(default=False) 
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField(blank=True, null=True)
+
 
     def __str__(self):
         return self.nombre
@@ -32,7 +34,7 @@ class Proyecto(models.Model):
 class UsuarioProyecto(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
-    estado = models.BooleanField(default=False) 
+   
     class Meta:
         unique_together = ('usuario', 'proyecto')
 
