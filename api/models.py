@@ -22,9 +22,10 @@ class Usuario(models.Model):
 class Proyecto(models.Model):
     nombre = models.CharField(max_length=100, unique=True)
     descripcion = models.TextField(blank=True, null=True)
-    estado = models.BooleanField(default=False) 
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField(blank=True, null=True)
+    estado = models.BooleanField(default=False, blank=True, null=True) 
+
 
 
     def __str__(self):
