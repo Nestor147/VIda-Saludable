@@ -32,6 +32,7 @@ class Proyecto(models.Model):
 class UsuarioProyecto(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
+    estado = models.BooleanField(default=False) 
     class Meta:
         unique_together = ('usuario', 'proyecto')
 
@@ -44,12 +45,13 @@ class Alimentacion(models.Model):
     desayuno_hora = models.TimeField()
     almuerzo_hora = models.TimeField()
     cena_hora = models.TimeField()
-    desayuno = models.CharField(max_length=100)  # desayuno, almuerzo, cena, otro
-    almuerzo = models.CharField(max_length=100)  # desayuno, almuerzo, cena, otro
-    cena = models.CharField(max_length=100)  # desayuno, almuerzo, cena, otro
-    desayuno_saludable = models.CharField(max_length=50, blank=True, null=True)
-    almuerzo_saludable = models.CharField(max_length=50, blank=True, null=True)
-    cena_saludable = models.CharField(max_length=50, blank=True, null=True)
+    desayuno = models.BooleanField(default=False)  # Indica si hubo desayuno
+    almuerzo = models.BooleanField(default=False)  # Indica si hubo almuerzo
+    cena = models.BooleanField(default=False)      # Indica si hubo cena
+    # Cambiar los campos de string a booleanos para indicar si fue saludable
+    desayuno_saludable = models.BooleanField(default=False, blank=True, null=True)  
+    almuerzo_saludable = models.BooleanField(default=False, blank=True, null=True)
+    cena_saludable = models.BooleanField(default=False, blank=True, null=True)
     user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -100,12 +102,13 @@ class Dormir(models.Model):
 
     def __str__(self):
         return f"Sueño ({self.fecha} {self.hora})"
+        
 
 
 class Despertar(models.Model):
     fecha = models.DateField()
     hora = models.TimeField()
-    estado = models.CharField(max_length=50, blank=True, null=True)
+    estado = models.BooleanField(default=False) 
     user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     def __str__(self):

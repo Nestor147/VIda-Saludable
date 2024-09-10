@@ -105,7 +105,7 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
 }
@@ -121,7 +121,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'vida_saludable',
         'USER': 'postgres',
-        'PASSWORD': 'Juanjose8923510',
+        'PASSWORD': '123456',
         'HOST': 'localhost',  # O la dirección IP de tu servidor MySQL
         'PORT': '5432',  # O el puerto que estés utilizando
     }
