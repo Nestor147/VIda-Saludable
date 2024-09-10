@@ -1,10 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Proyecto, UsuarioProyecto, DatosUsuario
-from .serializers import DatosUsuarioSerializer
+from .models import Proyecto, UsuarioProyecto, Usuario
+from .serializers import UsuarioWithRoleSerializer
 
-class IndicadoresSaludPorProyectoView(APIView):
+class UsersProjectView(APIView):
     def get(self, request, proyecto_id, *args, **kwargs):
         # Verificar si el proyecto existe
         if not Proyecto.objects.filter(id=proyecto_id).exists():
@@ -17,7 +17,7 @@ class IndicadoresSaludPorProyectoView(APIView):
         if not usuarios_ids:
             return Response({"detail": "No se encontraron usuarios para este proyecto."}, status=status.HTTP_404_NOT_FOUND)
 
-        # Obtener los datos de salud de los usuarios asociados al proyecto
-        datos = DatosUsuario.objects.filter(user_id__in=usuarios_ids, tipo='inicial')  # O 'final' según sea necesario
-        serializer = DatosUsuarioSerializer(datos, many=True)
+        # Obtener los usuarios asociados al proyecto
+        usuarios = Usuario.objects.filter(id__in=usuarios_ids)
+        serializer = UsuarioWithRoleSerializer(usuarios, many=True)
         return Response(serializer.data)

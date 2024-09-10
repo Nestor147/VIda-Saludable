@@ -80,3 +80,15 @@ class DatosUsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = DatosUsuario
         fields = '__all__'
+
+
+
+class UsuarioWithRoleSerializer(serializers.ModelSerializer):
+    role_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Usuario
+        fields = ['id', 'name', 'last_name', 'phone', 'email', 'password','role_name']  # Incluye los campos que necesitas
+
+    def get_role_name(self, obj):
+        return obj.role.name if obj.role else None

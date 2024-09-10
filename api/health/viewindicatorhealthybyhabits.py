@@ -113,61 +113,27 @@ class HealthIndicatorsAPIView(APIView):
 
      
         
+
+
         return Response({
-            'peso': paciente.peso,
-            'peso_status': peso_status,
+            "peso": {"promedio": paciente.peso, "status": peso_status},
+            "altura": {"promedio": paciente.altura, "status": altura_status},
+            "imc": {"valor": paciente.imc, "status": imc_status},
+            "presion_sistolica": {"promedio": paciente.presion_sistolica, "status": sistolica_status},
+            "presion_diastolica": {"promedio": paciente.presion_diastolica, "status": diastolica_status},
+            "radio_abdominal": {"promedio": paciente.radio_abdominal, "status_M": radio_abdominal_status, "status_F": radio_abdominal_status},
+            "grasa_corporal": {"promedio": paciente.grasa_corporal, "status_M": grasa_corporal_status, "status_F": grasa_corporal_status},
+            "grasa_visceral": {"promedio": paciente.grasa_visceral, "status": grasa_visceral_status},
+            "frecuencia_cardiaca": {"promedio": paciente.frecuencia_cardiaca, "status": frecuencia_cardiaca_status},
+            "frecuencia_respiratoria": {"promedio": paciente.frecuencia_respiratoria, "status": frecuencia_respiratoria_status},
+            "colesterol_total": {"promedio": paciente.colesterol_total, "status": colesterol_total_status},
+            "colesterol_hdl": {"promedio":  paciente.colesterol_hdl, "status_M": hdl_status, "status_F": hdl_status},
+            "colesterol_ldl": {"promedio": paciente.colesterol_ldl, "status": ldl_status},
+            "trigliceridos": {"promedio": paciente.trigliceridos, "status": trigliceridos_status},
+            "glucosa": {"promedio": paciente.glucosa, "status": glucosa_status},
+            "frecuencia_cardiaca_en_reposo": {"promedio":  paciente.frecuencia_cardiaca_en_reposo, "status": frecuencia_cardiaca_reposo_status},
+            "frecuencia_cardiaca_45_segundos": {"promedio": paciente.frecuencia_cardiaca_despues_de_45_segundos, "status": frecuencia_cardiaca_45_seg_status},
+            "frecuencia_cardiaca_1_minuto": {"promedio": paciente.frecuencia_cardiaca_1_minuto_despues, "status": frecuencia_cardiaca_1_min_status},
+            "resultado_test_rufier": {"promedio": paciente.resultado_test_rufier, "status": frecuencia_cardiaca_5_minutos_despues_status},
+        }, status=status.HTTP_200_OK)
 
-            'altura': paciente.altura,
-            'altura_status': altura_status,
-
-            'imc': paciente.imc,
-            'imc_status': imc_status,
-
-            'presion_sistolica': paciente.presion_sistolica,
-            'sistolica_status': sistolica_status,
-
-            'presion_diastolica': paciente.presion_diastolica,
-            'diastolica_status': diastolica_status,
-
-            'radio_abdominal': paciente.radio_abdominal,
-            'radio_abdominal_status': radio_abdominal_status,
-
-            'grasa_corporal': paciente.grasa_corporal,
-            'grasa_corporal_status': grasa_corporal_status,
-
-            'grasa_visceral': paciente.grasa_visceral,
-            'grasa_visceral_status': grasa_visceral_status,
-
-            'frecuencia_cardiaca': paciente.frecuencia_cardiaca,
-            'frecuencia_cardiaca_status': frecuencia_cardiaca_status,
-
-            'frecuencia_respiratoria': paciente.frecuencia_respiratoria,
-            'frecuencia_respiratoria_status': frecuencia_respiratoria_status,
-
-            'colesterol_total': paciente.colesterol_total,
-            'colesterol_total_status': colesterol_total_status,
-
-            'colesterol_hdl': paciente.colesterol_hdl,
-            'hdl_status': hdl_status,
-
-            'colesterol_ldl': paciente.colesterol_ldl,
-            'ldl_status': ldl_status,
-
-            'trigliceridos': paciente.trigliceridos,
-            'trigliceridos_status': trigliceridos_status,
-
-            'glucosa': paciente.glucosa,
-            'glucosa_status': glucosa_status,
-
-            'frecuencia_cardiaca_en_reposo': paciente.frecuencia_cardiaca_en_reposo,
-            'frecuencia_cardiaca_reposo_status': frecuencia_cardiaca_reposo_status,
-
-            'frecuencia_cardiaca_despues_de_45_segundos': paciente.frecuencia_cardiaca_despues_de_45_segundos,
-            'frecuencia_cardiaca_45_seg_status': frecuencia_cardiaca_45_seg_status,
-
-            'frecuencia_cardiaca_1_minuto_despues': paciente.frecuencia_cardiaca_1_minuto_despues,
-            'frecuencia_cardiaca_1_min_status': frecuencia_cardiaca_1_min_status,
-
-            'resultado_test_rufier': paciente.resultado_test_rufier,
-            'frecuencia_cardiaca_5_min_status': frecuencia_cardiaca_5_minutos_despues_status
-        })

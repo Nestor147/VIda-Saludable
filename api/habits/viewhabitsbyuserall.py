@@ -6,26 +6,32 @@ from rest_framework import status
 from ..models import Alimentacion, Agua, Esperanza, Sol, Aire, Dormir, Ejercicio, Despertar
 from .analizadorhabitos import AnalizadorHabitosVida
 
-class HabitosAPIView(APIView):
+class UserHabitsAllAPIView(APIView):
     def get(self, request, *args, **kwargs):
         usuario_id = self.kwargs.get('usuario_id')
-        start_date = request.query_params.get('start_date', '2024-08-20')
-        end_date = request.query_params.get('end_date', '2024-08-22')
 
-        # Obtener los registros del usuario en el rango de fechas
+        # Obtener los registros del usuario desde el primer día hasta el último registro
         modelos = {
-            'alimentacion': Alimentacion.objects.filter(user_id=usuario_id, fecha__range=[start_date, end_date]),
-            'agua': Agua.objects.filter(user_id=usuario_id, fecha__range=[start_date, end_date]),
-            'esperanza': Esperanza.objects.filter(user_id=usuario_id, fecha__range=[start_date, end_date]),
-            'sol': Sol.objects.filter(user_id=usuario_id, fecha__range=[start_date, end_date]),
-            'aire': Aire.objects.filter(user_id=usuario_id, fecha__range=[start_date, end_date]),
-            'dormir': Dormir.objects.filter(user_id=usuario_id, fecha__range=[start_date, end_date]),
-            'despertar': Despertar.objects.filter(user_id=usuario_id, fecha__range=[start_date, end_date]),
-            'ejercicio': Ejercicio.objects.filter(user_id=usuario_id, fecha__range=[start_date, end_date]),
+            'alimentacion': Alimentacion.objects.filter(user_id=usuario_id).order_by('fecha'),
+            'agua': Agua.objects.filter(user_id=usuario_id).order_by('fecha'),
+            'esperanza': Esperanza.objects.filter(user_id=usuario_id).order_by('fecha'),
+            'sol': Sol.objects.filter(user_id=usuario_id).order_by('fecha'),
+            'aire': Aire.objects.filter(user_id=usuario_id).order_by('fecha'),
+            'dormir': Dormir.objects.filter(user_id=usuario_id).order_by('fecha'),
+            'despertar': Despertar.objects.filter(user_id=usuario_id).order_by('fecha'),
+            'ejercicio': Ejercicio.objects.filter(user_id=usuario_id).order_by('fecha'),
         }
 
-        # Crear DataFrame con los datos clasificados
+        # Encuentra el tamaño mínimo común para las listas
+        min_size = min(len(modelo) for modelo in modelos.values())
+
+        # Truncar los datos al tamaño mínimo común
+        for key in modelos:
+            modelos[key] = list(modelos[key])[:min_size]
+
+        # Crear DataFrame con los datos clasificados y fechas
         df = pd.DataFrame({
+            'fecha': [data.fecha for data in modelos['alimentacion']],
             'alimentacion': [
                 AnalizadorHabitosVida.clasificar_alimentacion(
                     data.desayuno, data.almuerzo, data.cena,
@@ -121,13 +127,12 @@ class HabitosAPIView(APIView):
             habito: {
                 'tendencia': calcular_tendencia(habito),
                 'promedio': calcular_estadisticas(habito)[0],
-                'historial': df[habito].tolist(),
+                'historial': list(zip(df['fecha'], df[habito])),  # Incluir fechas en el historial
                 'comparacion_normas': comparar_con_normas(calcular_estadisticas(habito)[0], habito)
             }
-            for habito in df.columns
+            for habito in df.columns if habito != 'fecha'  # Excluir 'fecha' de los análisis
         }
 
-        result['recomendaciones'] = {habito: generar_recomendaciones(habito) for habito in df.columns}
-        result['alertas'] = {habito: generar_alertas(habito) for habito in df.columns}
+        
 
         return Response(result, status=status.HTTP_200_OK)

@@ -36,7 +36,7 @@ class UsuarioProyecto(models.Model):
         unique_together = ('usuario', 'proyecto')
 
     def __str__(self):
-        return f"{self.user} - {self.proyecto}"
+        return f"{self.usuario} - {self.proyecto}"
 
 
 class Alimentacion(models.Model):

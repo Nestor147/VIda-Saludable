@@ -1,27 +1,69 @@
 from decimal import Decimal
-from datetime import datetime, timedelta
-
+# from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 
 class AnalizadorHabitosVida:
     
     @staticmethod
-    def clasificar_alimentacion(tipo_alimento, saludable):
+    def clasificar_alimentacion(desayuno, almuerzo, cena, desayuno_saludable, almuerzo_saludable, cena_saludable, hora_desayuno, hora_almuerzo, hora_cena):
         """
-        Clasifica la calidad de la alimentación en función del tipo de alimento y si es saludable.
+        Clasifica la calidad de la alimentación diaria, incluyendo la consideración de los horarios de las comidas.
         """
+        # Horarios recomendados para las comidas (en formato 24 horas)
+        hora_desayuno_recomendada = (time(6, 0), time(9, 0))  # 6:00 - 9:00 AM
+        hora_almuerzo_recomendada = (time(12, 0), time(14, 0))  # 12:00 - 2:00 PM
+        hora_cena_recomendada = (time(18, 0), time(20, 0))  # 6:00 - 8:00 PM
+
         puntaje = 0
 
-        if saludable.lower() == 'si':
-            if tipo_alimento.lower() == 'desayuno':
-                puntaje = 90
-            elif tipo_alimento.lower() == 'almuerzo':
-                puntaje = 100
-            elif tipo_alimento.lower() == 'cena':
-                puntaje = 80
+        # Convertir las horas de comida a objetos time
+        def convertir_a_time(hora):
+            if isinstance(hora, int):
+                return time(hora // 100, hora % 100)
+            return hora
+
+        hora_desayuno = convertir_a_time(hora_desayuno)
+        hora_almuerzo = convertir_a_time(hora_almuerzo)
+        hora_cena = convertir_a_time(hora_cena)
+
+        # Desayuno
+        if desayuno.lower() == 'sí':
+            puntaje += 10
+            if desayuno_saludable.lower() == 'sí':
+                puntaje += 20
+            if hora_desayuno_recomendada[0] <= hora_desayuno <= hora_desayuno_recomendada[1]:
+                puntaje += 10
             else:
-                puntaje = 70
+                puntaje -= 5  # Penalización por desayunar fuera del horario recomendado
         else:
-            puntaje = 50
+            puntaje -= 10  # Penalización por saltarse el desayuno
+
+        # Almuerzo
+        if almuerzo.lower() == 'sí':
+            puntaje += 10
+            if almuerzo_saludable.lower() == 'sí':
+                puntaje += 30
+            if hora_almuerzo_recomendada[0] <= hora_almuerzo <= hora_almuerzo_recomendada[1]:
+                puntaje += 10
+            else:
+                puntaje -= 5  # Penalización por almorzar fuera del horario recomendado
+        else:
+            puntaje -= 10  # Penalización por saltarse el almuerzo
+
+        # Cena
+        if cena.lower() == 'sí':
+            puntaje += 10
+            if cena_saludable.lower() == 'sí':
+                puntaje += 20
+            if hora_cena_recomendada[0] <= hora_cena <= hora_cena_recomendada[1]:
+                puntaje += 10
+            else:
+                puntaje -= 5  # Penalización por cenar fuera del horario recomendado
+        else:
+            puntaje -= 10  # Penalización por saltarse la cena
+
+        # Asegurar que el puntaje esté entre 0 y 100
+        puntaje = max(0, min(puntaje, 100))
 
         return puntaje
 
@@ -31,14 +73,17 @@ class AnalizadorHabitosVida:
         """
         Clasifica el consumo de agua en función de la cantidad ingerida en mililitros.
         """
-        if cantidad >= 2000:
+        if cantidad >= 2500:
             return 100
+        elif 2000 <= cantidad < 2500:
+            return 90
         elif 1500 <= cantidad < 2000:
-            return 80
+            return 70
         elif 1000 <= cantidad < 1500:
-            return 60
+            return 50
         else:
-            return 40
+            return 30
+
 
 
     @staticmethod
@@ -48,7 +93,7 @@ class AnalizadorHabitosVida:
         """
         if tipo_practica.lower() == 'oracion':
             return 90
-        elif tipo_practica.lower() == 'leer la biblia':
+        elif tipo_practica.lower() == 'biblia':
             return 100
         else:
             return 50
@@ -85,23 +130,24 @@ class AnalizadorHabitosVida:
         """
         Clasifica la calidad del sueño basándose en la cantidad de horas dormidas.
         """
-        # Convierte los objetos time a datetime para poder restarlos
-        hoy = datetime.now().date()  # Usa la fecha de hoy
+        hoy = datetime.now().date()
         dormir_datetime = datetime.combine(hoy, dormir_hora)
         despertar_datetime = datetime.combine(hoy, despertar_hora)
-        
-        # Si la hora de despertar es menor que la hora de dormir, asumimos que despertó al día siguiente
+
         if despertar_datetime < dormir_datetime:
             despertar_datetime += timedelta(days=1)
-        
+
         horas_dormidas = (despertar_datetime - dormir_datetime).seconds / 3600
 
-        if 7 <= horas_dormidas <= 8:
+        if 7 <= horas_dormidas <= 9:
             return 100
-        elif 5 <= horas_dormidas < 7 or 8 < horas_dormidas <= 9:
+        elif 6 <= horas_dormidas < 7 or 9 < horas_dormidas <= 10:
             return 80
-        else:
+        elif 5 <= horas_dormidas < 6 or 10 < horas_dormidas <= 11:
             return 60
+        else:
+            return 40
+
 
 
     @staticmethod
@@ -124,7 +170,14 @@ class AnalizadorHabitosVida:
     @staticmethod
     def calcular_puntaje_diario(alimentacion, agua, esperanza, sol, aire, sueno, despertar, ejercicio):
         puntajes = [
-            AnalizadorHabitosVida.clasificar_alimentacion(alimentacion['tipo_alimento'], alimentacion['saludable']),
+            AnalizadorHabitosVida.clasificar_alimentacion(
+                alimentacion['desayuno'],
+                alimentacion['almuerzo'],
+                alimentacion['cena'],
+                alimentacion['desayuno_saludable'],
+                alimentacion['almuerzo_saludable'],
+                alimentacion['cena_saludable']
+            ),
             AnalizadorHabitosVida.clasificar_consumo_agua(agua['cantidad']),
             AnalizadorHabitosVida.clasificar_esperanza(esperanza['tipo_practica']),
             AnalizadorHabitosVida.clasificar_sol(sol['tiempo']),
@@ -136,3 +189,4 @@ class AnalizadorHabitosVida:
         
         puntaje_total = sum(puntajes) / len(puntajes)  # Promedio de puntajes sobre 100
         return puntaje_total  # Devuelve el puntaje total promedio sobre 100
+

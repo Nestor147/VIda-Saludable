@@ -31,6 +31,7 @@ class IndicadoresSaludPorProyectoView(APIView):
         promedios = datos.aggregate(
             promedio_peso=Avg('peso'),
             promedio_altura=Avg('altura'),
+            promedio_imc=Avg('imc'),
             promedio_presion_sistolica=Avg('presion_sistolica'),
             promedio_presion_diastolica=Avg('presion_diastolica'),
             promedio_radio_abdominal=Avg('radio_abdominal'),
@@ -53,6 +54,7 @@ class IndicadoresSaludPorProyectoView(APIView):
         # Acceder a los valores de 'promedios'
         promedio_peso = promedios['promedio_peso']
         promedio_altura = promedios['promedio_altura']
+        promedio_imc=promedios['promedio_imc']
         promedio_presion_sistolica = promedios['promedio_presion_sistolica']
         promedio_presion_diastolica = promedios['promedio_presion_diastolica']
         promedio_radio_abdominal = promedios['promedio_radio_abdominal']
@@ -78,8 +80,8 @@ class IndicadoresSaludPorProyectoView(APIView):
         altura_status = AnalizadorSalud.clasificar_altura(promedio_altura)
 
         # 3. IMC
-        imc = AnalizadorSalud.calcular_imc(promedio_peso, promedio_altura)
-        imc_status = AnalizadorSalud.clasificar_imc(imc)
+        # imc = AnalizadorSalud.calcular_imc(promedio_peso, promedio_altura)
+        imc_status = AnalizadorSalud.clasificar_imc(promedio_imc)
 
         # 4. Presión Arterial Sistólica
         sistolica_status = AnalizadorSalud.clasificar_presion_sistolica(promedio_presion_sistolica)
@@ -92,8 +94,8 @@ class IndicadoresSaludPorProyectoView(APIView):
         radio_abdominal_status_F = AnalizadorSalud.clasificar_radio_abdominal(promedio_radio_abdominal, 'F')
 
         # 7. Grasa Corporal (%)
-        grasa_corporal_status_M = AnalizadorSalud.clasificar_grasa_corporal(imc, promedio_resultado_edades, 'M')
-        grasa_corporal_status_F = AnalizadorSalud.clasificar_grasa_corporal(imc, promedio_resultado_edades, 'F')
+        grasa_corporal_status_M = AnalizadorSalud.clasificar_grasa_corporal(promedio_imc, promedio_resultado_edades, 'M')
+        grasa_corporal_status_F = AnalizadorSalud.clasificar_grasa_corporal(promedio_imc, promedio_resultado_edades, 'F')
 
         # 8. Grasa Visceral
         grasa_visceral_status = AnalizadorSalud.clasificar_grasa_visceral(promedio_grasa_visceral)
@@ -137,7 +139,7 @@ class IndicadoresSaludPorProyectoView(APIView):
         return Response({
             "peso": {"promedio": promedio_peso, "status": peso_status},
             "altura": {"promedio": promedio_altura, "status": altura_status},
-            "imc": {"valor": imc, "status": imc_status},
+            "imc": {"valor": promedio_imc, "status": imc_status},
             "presion_sistolica": {"promedio": promedio_presion_sistolica, "status": sistolica_status},
             "presion_diastolica": {"promedio": promedio_presion_diastolica, "status": diastolica_status},
             "radio_abdominal": {"promedio": promedio_radio_abdominal, "status_M": radio_abdominal_status_M, "status_F": radio_abdominal_status_F},
