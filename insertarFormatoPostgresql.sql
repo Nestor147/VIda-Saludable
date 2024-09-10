@@ -74,12 +74,12 @@ INSERT INTO api_usuario (name, last_name, phone, email, password, role_id) VALUE
 ('Johana', 'Márquez', '901-234-5682', 'johana.marquez@example.com', 'password59', 4),
 ('Felipe', 'Rincón', '012-345-6783', 'felipe.rincon@example.com', 'password60', 5);
 
-INSERT INTO api_proyecto (nombre, descripcion, fecha_inicio, fecha_fin) VALUES
-('Proyecto Alpha', 'Descripción del Proyecto Alpha', '2024-01-15', '2024-06-30'),
-('Proyecto Beta', 'Descripción del Proyecto Beta', '2024-02-01', '2024-07-31'),
-('Proyecto Gamma', 'Descripción del Proyecto Gamma', '2024-03-01', '2024-08-31'),
-('Proyecto Delta', 'Descripción del Proyecto Delta', '2024-04-01', '2024-09-30'),
-('Proyecto Epsilon', 'Descripción del Proyecto Epsilon', '2024-05-01', '2024-10-31');
+INSERT INTO api_proyecto (nombre, descripcion, fecha_inicio, fecha_fin, estado) VALUES
+('Proyecto Alpha', 'Descripción del Proyecto Alpha', '2024-01-15', '2024-06-30',1),
+('Proyecto Beta', 'Descripción del Proyecto Beta', '2024-02-01', '2024-07-31',0),
+('Proyecto Gamma', 'Descripción del Proyecto Gamma', '2024-03-01', '2024-08-31',1),
+('Proyecto Delta', 'Descripción del Proyecto Delta', '2024-04-01', '2024-09-30',1),
+('Proyecto Epsilon', 'Descripción del Proyecto Epsilon', '2024-05-01', '2024-10-31',0);
 
 INSERT INTO api_usuarioproyecto (usuario_id, proyecto_id) VALUES
 (1,1),
