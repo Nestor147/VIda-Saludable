@@ -174,8 +174,6 @@ class DatosCorporales(models.Model):
     edad = models.IntegerField()
     sexo = models.CharField(max_length=20)
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
-
-
     def __str__(self):
         return f"Datos corporales de {self.usuario.correo} ({self.tipo})"
 
@@ -231,7 +229,7 @@ class DatosHabitos(models.Model):
     leo_biblia = models.IntegerField(null=True, blank=True)
     practico_oracion = models.IntegerField(null=True, blank=True)
     orar_y_estudiar_biblia_desarrollo_personal = models.IntegerField(null=True, blank=True)
-    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
+   
 
     def __str__(self):
         return f"Hábitos de {self.usuario.correo}"

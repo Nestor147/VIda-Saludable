@@ -4,10 +4,10 @@ from .views import (
     RoleViewSet, UsuarioViewSet, DatosPersonalesUsuarioViewSet, AlimentacionViewSet, AguaViewSet, EsperanzaViewSet, 
     SolViewSet, AireViewSet, DormirViewSet, DespertarViewSet, EjercicioViewSet, ProyectoViewSet, UsuarioProyectoViewSet, DatosCorporalesViewSet, DatosHabitosViewSet
 )
-from .health.viewindicatorhealthybyhabits import HealthIndicatorsAPIView
-from .health.viewindicatormainwithfinal import HealthIndicatorsComparisonAPIView
+# from .health.viewindicatorhealthybyhabits import HealthIndicatorsAPIView
+# from .health.viewindicatormainwithfinal import HealthIndicatorsComparisonAPIView
 
-from .health.viewindicatorproject import IndicadoresSaludPorProyectoView
+# from .health.viewindicatorproject import IndicadoresSaludPorProyectoView
 from .habits.viewhabitsbyuser import HabitosAPIView
 from .habits.viewdatesofuser import GetDatesByIdView
 from .viewusersproject import UsersProjectView
@@ -34,15 +34,15 @@ router.register(r'datos-habitos', DatosHabitosViewSet)
 urlpatterns = [
 
     #estado del paciente
-    path('indicadores-salud-por-usuario/<int:usuario_id>/', HealthIndicatorsAPIView.as_view(), name='indicadores_salud'),
+    # path('indicadores-salud-por-usuario/<int:usuario_id>/', HealthIndicatorsAPIView.as_view(), name='indicadores_salud'),
 
     
     #estado del paciente segun el proyecto
-    path('indicadores-salud-por-proyectos/<int:proyecto_id>/', IndicadoresSaludPorProyectoView.as_view(), name='proyecto-detalle'),
+    # path('indicadores-salud-por-proyectos/<int:proyecto_id>/', IndicadoresSaludPorProyectoView.as_view(), name='proyecto-detalle'),
 
     ## Seccion seguimiento Usuarios
     #comparadores iniciales vs finales
-    path('indicadores-salud-iniciales-finales/<int:usuario_id>/', HealthIndicatorsComparisonAPIView.as_view(), name='indicadores_salud'),
+    # path('indicadores-salud-iniciales-finales/<int:usuario_id>/', HealthIndicatorsComparisonAPIView.as_view(), name='indicadores_salud'),
 
 
     #habitos entre fechas
