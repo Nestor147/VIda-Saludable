@@ -4,17 +4,32 @@ CREATE TABLE role (
     name VARCHAR(50) NOT NULL UNIQUE
 );
 
--- Tabla de usuarios con relación a roles
-CREATE TABLE usuario (
+
+
+CREATE TABLE usuarios (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(50) NOT NULL,
-    phone VARCHAR(100),
-    email VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(100) NOT NULL,
+    correo VARCHAR(50) NOT NULL UNIQUE,
+    contrasenia VARCHAR(100) NOT NULL,
     role_id INT,
     FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE SET NULL
 );
+
+CREATE TABLE datos_personales_usuarios (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    nombres_apellidos VARCHAR(255),
+    sexo VARCHAR(10),
+    edad INT,
+    estado_civil VARCHAR(20),
+    fecha_nacimiento DATE,
+    telefono VARCHAR(100),
+    grado_instruccion VARCHAR(50),
+    procedencia VARCHAR(100),
+    religion VARCHAR(50),
+    fecha DATE,
+    FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
+
+)
 
 -- Tabla de proyectos
 CREATE TABLE proyecto (
@@ -122,9 +137,7 @@ CREATE TABLE ejercicio (
 
 
 
-
-
- CREATE TABLE datos_usuario (
+ CREATE TABLE datos_corporales (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
     peso DECIMAL(5, 2),               -- Peso en kg
@@ -141,7 +154,11 @@ CREATE TABLE ejercicio (
     colesterol_hdl DECIMAL(5, 2),     -- Colesterol HDL en mg/dL
     colesterol_ldl DECIMAL(5, 2),     -- Colesterol LDL en mg/dL
     trigliceridos DECIMAL(5, 2),      -- Triglicéridos en mg/dL
-    glucosa DECIMAL(5, 2),            -- Glucosa en mg/dL
+    glucosa DECIMAL(5, 2),  
+    temperatura NUMERIC(3,1), -------------------
+    saturacion_oxigeno INT, -------------------   
+    porcentaje_musculo NUMERIC(4,1),-------------------
+    glicemia_basal NUMERIC(4,1),-------------------       -- Glucosa en mg/dL
     frecuencia_cardiaca_en_reposo INT,                           -- Frecuencia cardíaca en reposo
     frecuencia_cardiaca_despues_de_45_segundos INT,                           -- Frecuencia cardíaca después de 30 sentadillas en 45 segundos
     frecuencia_cardiaca_1_minuto_despues INT,                           -- Frecuencia cardíaca 1 minuto después de las sentadillas
@@ -157,40 +174,11 @@ CREATE TABLE ejercicio (
 
 
 
-CREATE TABLE datos_formulario_usuario (
+
+
+CREATE TABLE datos_habitos(
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
-    fecha DATE,
-    nombres_apellidos VARCHAR(255),
-    sexo VARCHAR(10),
-    edad INT,
-    estado_civil VARCHAR(20),
-    fecha_nacimiento DATE,
-    grado_instruccion VARCHAR(50),
-    procedencia VARCHAR(100),
-    religion VARCHAR(50),
-    cigarrillos VARCHAR(5),
-    num_cigarrillos INT,
-    anio_consumo INT,
-    presion_arterial VARCHAR(10),
-    resultado_presion_arterial VARCHAR(50),
-    frecuencia_cardiaca INT,
-    frecuencia_respiratoria INT,
-    temperatura NUMERIC(3,1),
-    saturacion_oxigeno INT,
-    talla_m NUMERIC(3,2),
-    peso_kg NUMERIC(4,1),
-    imc_resultado VARCHAR(50),
-    observaciones TEXT,
-    perimetro_abdominal_cm INT,
-    porcentaje_gc NUMERIC(4,1),
-    porcentaje_gv NUMERIC(4,1),
-    porcentaje_musculo NUMERIC(4,1),
-    glicemia_basal NUMERIC(4,1),
-    colesterol NUMERIC(4,1),
-    hdl NUMERIC(4,1),
-    trigliceridos NUMERIC(4,1),
-    ldl NUMERIC(4,1),
     consumo_3_comidas_horario_fijo INT,
     consumo_5_porciones_frutas_verduras INT,
     consumo_3_porciones_proteinas INT,
@@ -241,4 +229,9 @@ CREATE TABLE datos_formulario_usuario (
     leo_biblia INT,
     practico_oracion INT,
     orar_y_estudiar_biblia_desarrollo_personal INT
+    
+    FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
+
+
+
