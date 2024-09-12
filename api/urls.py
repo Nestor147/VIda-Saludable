@@ -2,7 +2,7 @@ from django.urls import path
 from rest_framework.routers import DefaultRouter
 from .views import (
     RoleViewSet, UsuarioViewSet, AlimentacionViewSet, AguaViewSet, EsperanzaViewSet, 
-    SolViewSet, AireViewSet, DormirViewSet, DespertarViewSet, EjercicioViewSet, ProyectoViewSet, UsuarioProyectoViewSet, DatosUsuarioViewSet
+    SolViewSet, AireViewSet, DormirViewSet, DespertarViewSet, EjercicioViewSet, ProyectoViewSet, UsuarioProyectoViewSet, DatosUsuarioViewSet, DatosFormularioUsuarioViewSet
 )
 from .health.viewindicatorhealthybyhabits import HealthIndicatorsAPIView
 from .health.viewindicatormainwithfinal import HealthIndicatorsComparisonAPIView
@@ -28,7 +28,8 @@ router.register(r'despertares', DespertarViewSet)
 router.register(r'ejercicios', EjercicioViewSet)
 router.register(r'proyectos', ProyectoViewSet)
 router.register(r'usuario-proyectos', UsuarioProyectoViewSet)
-router.register(r'datos-iniciales', DatosUsuarioViewSet)
+router.register(r'datos-usuario', DatosUsuarioViewSet)
+router.register(r'datos-formulario-usuario', DatosFormularioUsuarioViewSet)
 
 urlpatterns = [
 

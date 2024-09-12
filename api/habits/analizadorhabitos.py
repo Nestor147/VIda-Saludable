@@ -27,9 +27,9 @@ class AnalizadorHabitosVida:
         hora_cena = convertir_a_time(hora_cena)
 
         # Desayuno
-        if desayuno.lower() == 'sí':
+        if desayuno == 1:
             puntaje += 10
-            if desayuno_saludable.lower() == 'sí':
+            if desayuno_saludable == 1:
                 puntaje += 20
             if hora_desayuno_recomendada[0] <= hora_desayuno <= hora_desayuno_recomendada[1]:
                 puntaje += 10
@@ -39,9 +39,9 @@ class AnalizadorHabitosVida:
             puntaje -= 10  # Penalización por saltarse el desayuno
 
         # Almuerzo
-        if almuerzo.lower() == 'sí':
+        if almuerzo == 1:
             puntaje += 10
-            if almuerzo_saludable.lower() == 'sí':
+            if almuerzo_saludable == 1:
                 puntaje += 30
             if hora_almuerzo_recomendada[0] <= hora_almuerzo <= hora_almuerzo_recomendada[1]:
                 puntaje += 10
@@ -51,9 +51,9 @@ class AnalizadorHabitosVida:
             puntaje -= 10  # Penalización por saltarse el almuerzo
 
         # Cena
-        if cena.lower() == 'sí':
+        if cena == 1:
             puntaje += 10
-            if cena_saludable.lower() == 'sí':
+            if cena_saludable == 1:
                 puntaje += 20
             if hora_cena_recomendada[0] <= hora_cena <= hora_cena_recomendada[1]:
                 puntaje += 10

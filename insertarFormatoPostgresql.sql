@@ -582,6 +582,7 @@ INSERT INTO api_sol (fecha, tiempo, user_id) VALUES
 ('2024-08-31', 50, 1),
 ('2024-09-01', 50, 1),
 ('2024-09-02', 30, 1),
+('2024-09-03', 30, 1),
 ('2024-09-04', 40, 1),
 ('2024-09-05', 70, 1),
 ('2024-09-06', 40, 1),
@@ -615,6 +616,7 @@ INSERT INTO api_sol (fecha, tiempo, user_id) VALUES
 ('2024-08-31', 30, 2),
 ('2024-09-01', 30, 2),
 ('2024-09-02', 30, 2),
+('2024-09-03', 30, 2),
 ('2024-09-04', 40, 2),
 ('2024-09-05', 30, 2),
 ('2024-09-06', 40, 2),
@@ -648,6 +650,7 @@ INSERT INTO api_sol (fecha, tiempo, user_id) VALUES
 ('2024-08-31', 40, 3),
 ('2024-09-01', 40, 3),
 ('2024-09-02', 40, 3),
+('2024-09-03', 40, 3),
 ('2024-09-04', 40, 3),
 ('2024-09-05', 80, 3),
 ('2024-09-06', 60, 3),
@@ -681,6 +684,7 @@ INSERT INTO api_sol (fecha, tiempo, user_id) VALUES
 ('2024-08-31', 40, 4),
 ('2024-09-01', 50, 4),
 ('2024-09-02', 30, 4),
+('2024-09-03', 30, 4),
 ('2024-09-04', 40, 4),
 ('2024-09-05', 60, 4),
 ('2024-09-06', 40, 4),
@@ -867,6 +871,7 @@ INSERT INTO api_dormir (fecha, hora, user_id) VALUES
 ('2024-09-10', '23:30:00', 1), 
 ('2024-09-11', '22:00:00', 1), 
 ('2024-09-12', '22:30:00', 1), 
+('2024-09-13', '22:30:00', 1), 
 ('2024-09-14', '23:30:00', 1), 
 ('2024-09-15', '23:45:00', 1), 
 
@@ -900,6 +905,7 @@ INSERT INTO api_dormir (fecha, hora, user_id) VALUES
 ('2024-09-10', '23:45:00', 2), 
 ('2024-09-11', '22:15:00', 2), 
 ('2024-09-12', '22:00:00', 2), 
+('2024-09-13', '22:00:00', 2), 
 ('2024-09-14', '23:15:00', 2), 
 ('2024-09-15', '23:00:00', 2),
 
@@ -933,6 +939,7 @@ INSERT INTO api_dormir (fecha, hora, user_id) VALUES
 ('2024-09-10', '22:45:00', 3), 
 ('2024-09-11', '22:30:00', 3), 
 ('2024-09-12', '21:45:00', 3), 
+('2024-09-13', '21:45:00', 3), 
 ('2024-09-14', '23:00:00', 3), 
 ('2024-09-15', '21:45:00', 3),
 
@@ -966,6 +973,7 @@ INSERT INTO api_dormir (fecha, hora, user_id) VALUES
 ('2024-09-10', '23:00:00', 4), 
 ('2024-09-11', '22:45:00', 4), 
 ('2024-09-12', '22:00:00', 4), 
+('2024-09-13', '22:00:00', 4), 
 ('2024-09-14', '23:45:00', 4), 
 ('2024-09-15', '22:30:00', 4);
 
@@ -996,6 +1004,7 @@ INSERT INTO api_despertar (fecha, hora, estado, user_id) VALUES
 ('2024-09-06', '07:30:00', 1, 1), 
 ('2024-09-07', '06:00:00', 1, 1), 
 ('2024-09-08', '06:00:00', 0, 1), 
+('2024-09-09', '06:00:00', 0, 1), 
 ('2024-09-10', '06:30:00', 0, 1), 
 ('2024-09-11', '06:20:00', 1, 1), 
 ('2024-09-12', '06:00:00', 1, 1), 
@@ -1030,6 +1039,7 @@ INSERT INTO api_despertar (fecha, hora, estado, user_id) VALUES
 ('2024-09-06', '07:45:00', 1, 2), 
 ('2024-09-07', '06:15:00', 1, 2), 
 ('2024-09-08', '06:15:00', 0, 2), 
+('2024-09-09', '06:15:00', 0, 2), 
 ('2024-09-10', '06:45:00', 0, 2), 
 ('2024-09-11', '06:30:00', 1, 2), 
 ('2024-09-12', '06:15:00', 1, 2), 
@@ -1064,6 +1074,7 @@ INSERT INTO api_despertar (fecha, hora, estado, user_id) VALUES
 ('2024-09-06', '08:00:00', 1, 3), 
 ('2024-09-07', '06:30:00', 1, 3), 
 ('2024-09-08', '06:30:00', 0, 3), 
+('2024-09-09', '06:30:00', 0, 3), 
 ('2024-09-10', '07:00:00', 0, 3), 
 ('2024-09-11', '06:40:00', 1, 3), 
 ('2024-09-12', '06:30:00', 1, 3), 
@@ -1097,6 +1108,7 @@ INSERT INTO api_despertar (fecha, hora, estado, user_id) VALUES
 ('2024-09-06', '08:15:00', 1, 4), 
 ('2024-09-07', '06:45:00', 1, 4), 
 ('2024-09-08', '06:45:00', 0, 4), 
+('2024-09-09', '06:45:00', 0, 4), 
 ('2024-09-10', '07:15:00', 0, 4), 
 ('2024-09-11', '06:50:00', 1, 4), 
 ('2024-09-12', '06:45:00', 1, 4), 
@@ -1373,3 +1385,36 @@ INSERT INTO api_datosusuario (user_id, peso, altura, imc, presion_sistolica, pre
 (58,85.00,1.83,25.41, 134, 88, 95.00, 20.00, 16.00, 79, 19, 220.00, 74.00, 140.00, 160.00, 102.00, 72, 89,81,10.0, '2024-08-15', 'final', '1981-08-14', 43,'M'),
 (59,77.00,1.78,24.32, 128, 82, 88.00, 18.00, 12.00, 74, 17, 210.00, 70.00, 140.00, 155.00, 98.00, 68, 85, 81,10.0, '2024-08-15', 'final', '1987-04-15', 37,'M'),
 (60,68.00,1.72,22.89, 119, 76, 84.00, 15.00, 11.00, 71, 15, 195.00, 68.00, 130.00, 145.00, 86.00, 64, 79, 81,10.0, '2024-08-15', 'final', '1990-12-05', 33,'M');
+
+
+
+INSERT INTO datos_formulario_usuario (
+    user_id, fecha, nombres_apellidos, sexo, edad, estado_civil, fecha_nacimiento, grado_instruccion, procedencia,
+    religion, cigarrillos, num_cigarrillos, anio_consumo, presion_arterial, resultado_presion_arterial, frecuencia_cardiaca, 
+    frecuencia_respiratoria, temperatura, saturacion_oxigeno, talla_m, peso_kg, imc_resultado, observaciones, 
+    perimetro_abdominal_cm, porcentaje_gc, porcentaje_gv, porcentaje_musculo, glicemia_basal, colesterol, hdl, 
+    trigliceridos, ldl, consumo_3_comidas_horario_fijo, consumo_5_porciones_frutas_verduras, consumo_3_porciones_proteinas, 
+    ingiero_otros_alimentos, consumo_carbohidratos, consumo_alimentos_fritos, consumo_alimentos_hechos_en_casa, 
+    consumo_liquidos_mientras_como, bebo_solo_agua_pura, bebo_8_vasos_agua, bebidas_con_azucar, bebo_agua_al_despertar, 
+    bebo_agua_antes_comidas, bebo_agua_para_dormir, consumo_bebidas_alcoholicas, eventos_sociales_alcohol, 
+    consumo_sustancias_estimulantes, consumo_refrescos_cola, consumo_cigarrillos, consumo_comida_chatarra, pedir_mas_comida, 
+    agregar_mas_azucar, agregar_mas_sal, satisfecho_trabajo, tenso_nervioso_estresado, tiempo_libre_redes_sociales, 
+    satisfecho_relaciones_sociales, apoyo_familia_decisiones, realizo_actividad_deportiva, ejercicio_fisico_diario, 
+    practico_deporte_tiempo_libre, dedicacion_30_minutos_ejercicio, ejercicio_carrera_bicicleta, duermo_7_8_horas, 
+    despertar_durante_noche, dificultad_sueno_reparador, horario_sueno_diario, despertar_horario_diario, exposicion_sol_diaria, 
+    exposicion_sol_horas_seguras, exposicion_sol_20_minutos, uso_bloqueador_solar, tecnica_respiraciones_profundas, 
+    tiempo_tecnica_respiraciones, horario_tecnica_respiraciones_manana, horario_tecnica_respiraciones_noche, 
+    ser_supremo_interviene, leo_biblia, practico_oracion, orar_y_estudiar_biblia_desarrollo_personal
+)
+VALUES
+(1, '2023-07-23', 'Juan Perez', 'HOMBRE', 30, 'SOLTERO', '1993-01-12', 'TÉCNICO SUPERIOR', 'LA PAZ', 'CATÓLICA', 'NO', 0, 0, '120/80', 'Normal', 75, 18, 36.5, 98, 1.75, 70.5, 'NORMAL', '', 85, 22.1, 15.2, 45.5, 95.0, 200.0, 50.0, 150.0, 130.0, 3, 4, 3, 1, 4, 3, 2, 1, 2, 3, 3, 1, 2, 1, 1, 1, 3, 2, 1, 1, 3, 3, 3, 1, 1, 3, 2, 1, 1, 4, 4, 3, 4, 1, 1, 1, 5, 1, 1, 1, 5, 4, 5),
+(2, '2023-07-23', 'Ana Gomez', 'MUJER', 28, 'CASADA', '1995-03-15', 'UNIVERSITARIO', 'COCHABAMBA', 'EVANGÉLICA', 'NO', 0, 0, '110/70', 'Normal', 72, 20, 37.0, 97, 1.60, 58.0, 'NORMAL', '', 70, 25.3, 18.1, 40.3, 90.0, 190.0, 60.0, 140.0, 120.0, 3, 4, 4, 2, 5, 4, 3, 2, 2, 3, 3, 1, 3, 2, 1, 1, 2, 2, 2, 1, 3, 4, 4, 2, 1, 4, 3, 1, 2, 5, 5, 4, 5, 1, 1, 2, 5, 1, 1, 2, 5, 4, 4),
+(3, '2023-07-23', 'Carlos Lopez', 'HOMBRE', 35, 'CASADO', '1988-05-22', 'SECUNDARIO', 'SANTA CRUZ', 'CATÓLICA', 'SÍ', 5, 10, '140/90', 'Alta', 80, 22, 37.2, 96, 1.70, 85.0, 'SOBREPESO', '', 100, 28.5, 22.0, 50.1, 105.0, 210.0, 45.0, 160.0, 140.0, 2, 3, 3, 2, 4, 3, 2, 1, 1, 2, 2, 2, 2, 2, 1, 2, 3, 3, 3, 1, 3, 4, 4, 2, 1, 3, 2, 1, 2, 4, 5, 3, 4, 1, 1, 2, 5, 1, 1, 1, 5, 4, 4),
+(4, '2023-07-23', 'Maria Fernandez', 'MUJER', 40, 'DIVORCIADA', '1983-02-10', 'TÉCNICO SUPERIOR', 'LA PAZ', 'PROTESTANTE', 'NO', 0, 0, '115/75', 'Normal', 74, 19, 36.4, 98, 1.68, 65.0, 'NORMAL', '', 85, 26.2, 17.5, 42.3, 92.0, 195.0, 55.0, 145.0, 125.0, 3, 4, 3, 1, 4, 3, 2, 1, 2, 3, 3, 1, 3, 2, 1, 1, 3, 3, 1, 1, 2, 3, 4, 3, 1, 4, 3, 2, 2, 5, 5, 4, 5, 2, 1, 1, 5, 2, 1, 2, 5, 4, 5),
+(5, '2023-07-23', 'Luis Silva', 'HOMBRE', 50, 'VIUDO', '1973-09-12', 'BACHILLERATO', 'ORURO', 'CATÓLICA', 'NO', 0, 0, '120/80', 'Normal', 73, 20, 36.5, 97, 1.70, 78.0, 'SOBREPESO', '', 95, 27.4, 19.5, 48.3, 98.0, 210.0, 45.0, 150.0, 130.0, 2, 3, 3, 1, 4, 3, 3, 2, 2, 3, 3, 1, 3, 1, 1, 2, 2, 2, 1, 1, 3, 3, 3, 1, 1, 4, 3, 1, 1, 4, 4, 3, 5, 1, 1, 1, 4, 1, 1, 1, 5, 4, 4),
+(6, '2023-07-23', 'Lucia Gonzales', 'MUJER', 42, 'CASADA', '1981-11-10', 'UNIVERSITARIO', 'LA PAZ', 'EVANGÉLICA', 'SÍ', 10, 15, '130/85', 'Normal', 76, 21, 37.1, 98, 1.63, 68.0, 'SOBREPESO', '', 90, 28.0, 20.5, 46.3, 100.0, 200.0, 55.0, 155.0, 140.0, 3, 4, 4, 2, 5, 4, 3, 2, 2, 4, 4, 1, 3, 1, 1, 2, 3, 3, 1, 1, 3, 3, 4, 2, 1, 5, 4, 2, 1, 5, 5, 4, 5, 2, 1, 2, 5, 1, 1, 2, 5, 4, 4),
+(7, '2023-07-23', 'Fernando Quintana', 'HOMBRE', 55, 'CASADO', '1968-02-20', 'SECUNDARIO', 'POTOSÍ', 'CATÓLICA', 'SÍ', 20, 30, '135/90', 'Alta', 85, 25, 37.3, 96, 1.80, 90.0, 'OBESO', '', 105, 30.1, 24.0, 52.5, 110.0, 230.0, 40.0, 170.0, 150.0, 2, 3, 3, 1, 4, 3, 3, 2, 1, 3, 3, 2, 3, 2, 1, 2, 3, 3, 3, 1, 3, 4, 4, 3, 2, 4, 3, 2, 2, 5, 5, 4, 5, 2, 1, 1, 5, 2, 1, 1, 5, 4, 4),
+(8, '2023-07-23', 'Patricia Martinez', 'MUJER', 32, 'SOLTERA', '1991-04-18', 'UNIVERSITARIO', 'TARIJA', 'PROTESTANTE', 'NO', 0, 0, '110/70', 'Normal', 72, 18, 36.8, 98, 1.65, 60.0, 'NORMAL', '', 80, 23.2, 16.0, 44.0, 90.0, 190.0, 55.0, 140.0, 120.0, 3, 4, 4, 2, 5, 4, 3, 1, 2, 4, 4, 1, 2, 1, 1, 1, 2, 2, 1, 1, 3, 4, 3, 2, 1, 5, 4, 1, 2, 5, 5, 4, 5, 2, 1, 2, 5, 1, 1, 1, 5, 4, 5),
+(9, '2023-07-23', 'Jorge Castro', 'HOMBRE', 45, 'DIVORCIADO', '1978-06-15', 'BACHILLERATO', 'SUCRE', 'EVANGÉLICA', 'SÍ', 15, 25, '140/95', 'Alta', 80, 20, 37.5, 97, 1.75, 88.0, 'SOBREPESO', '', 100, 28.9, 22.3, 47.5, 105.0, 210.0, 50.0, 160.0, 140.0, 2, 3, 3, 2, 4, 3, 3, 1, 1, 2, 3, 2, 3, 2, 1, 2, 3, 3, 2, 1, 3, 4, 4, 2, 1, 4, 3, 1, 2, 5, 5, 3, 5, 2, 1, 1, 5, 2, 1, 2, 5, 4, 4),
+(10, '2023-07-23', 'Sofia Diaz', 'MUJER', 25, 'SOLTERA', '1998-01-22', 'TÉCNICO SUPERIOR', 'BENI', 'CATÓLICA', 'NO', 0, 0, '110/70', 'Normal', 72, 18, 36.7, 98, 1.65, 55.0, 'NORMAL', '', 75, 21.5, 15.0, 43.5, 90.0, 185.0, 60.0, 135.0, 115.0, 3, 4, 4, 1, 5, 4, 3, 1, 2, 4, 4, 1, 2, 1, 1, 1, 2, 2, 1, 1, 3, 4, 3, 1, 1, 5, 4, 2, 2, 5, 5, 4, 5, 1, 1, 1, 5, 1, 1, 2, 5, 4, 5),
+-- Continúa llenando los registros hasta el número 60

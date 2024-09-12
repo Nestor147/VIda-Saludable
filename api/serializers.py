@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import (
     Role, Usuario, Alimentacion, Agua, Esperanza, Sol, Aire, Dormir,
-    Despertar, Ejercicio, Proyecto, UsuarioProyecto, DatosUsuario
+    Despertar, Ejercicio, Proyecto, UsuarioProyecto, DatosUsuario,DatosFormularioUsuario
 )
 
 class RoleSerializer(serializers.ModelSerializer):
@@ -79,6 +79,12 @@ class EjercicioSerializer(serializers.ModelSerializer):
 class DatosUsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = DatosUsuario
+        fields = '__all__'
+
+
+class DatosFormularioUsuarioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DatosFormularioUsuario
         fields = '__all__'
 
 

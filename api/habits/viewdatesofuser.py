@@ -15,3 +15,4 @@ class GetDatesByIdView(APIView):
         )
 
         return Response(fechas, status=status.HTTP_200_OK)
+

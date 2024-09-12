@@ -2,13 +2,13 @@ from rest_framework import viewsets
 
 from .models import (
     Role, Usuario, Alimentacion, Agua, Esperanza, Sol, Aire, Dormir,
-    Despertar, Ejercicio, Proyecto, UsuarioProyecto, DatosUsuario
+    Despertar, Ejercicio, Proyecto, UsuarioProyecto, DatosUsuario, DatosFormularioUsuario
 )
 from .serializers import (
     RoleSerializer, UsuarioSerializer, AlimentacionSerializer, AguaSerializer, 
     EsperanzaSerializer, SolSerializer, AireSerializer, DormirSerializer, 
     DespertarSerializer, EjercicioSerializer, ProyectoSerializer, UsuarioProyectoSerializer,
-    DatosUsuarioSerializer
+    DatosUsuarioSerializer, DatosFormularioUsuarioSerializer
 )
 
 class RoleViewSet(viewsets.ModelViewSet):
@@ -84,4 +84,10 @@ class EjercicioViewSet(viewsets.ModelViewSet):
 class DatosUsuarioViewSet(viewsets.ModelViewSet):
     queryset = DatosUsuario.objects.all()
     serializer_class = DatosUsuarioSerializer
+    # permission_classes = [IsAuthenticated]
+
+
+class DatosFormularioUsuarioViewSet(viewsets.ModelViewSet):
+    queryset = DatosFormularioUsuario.objects.all()
+    serializer_class = DatosFormularioUsuarioSerializer
     # permission_classes = [IsAuthenticated]
