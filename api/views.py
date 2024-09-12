@@ -1,14 +1,14 @@
 from rest_framework import viewsets
 
 from .models import (
-    Role, Usuario, Alimentacion, Agua, Esperanza, Sol, Aire, Dormir,
-    Despertar, Ejercicio, Proyecto, UsuarioProyecto, DatosUsuario, DatosFormularioUsuario
+    Role, Usuario, DatosPersonalesUsuario, Alimentacion, Agua, Esperanza, Sol, Aire, Dormir,
+    Despertar, Ejercicio, Proyecto, UsuarioProyecto, DatosCorporales, DatosHabitos
 )
 from .serializers import (
-    RoleSerializer, UsuarioSerializer, AlimentacionSerializer, AguaSerializer, 
+    RoleSerializer, UsuarioSerializer, DatosPersonalesUsuarioSerializer, AlimentacionSerializer, AguaSerializer, 
     EsperanzaSerializer, SolSerializer, AireSerializer, DormirSerializer, 
     DespertarSerializer, EjercicioSerializer, ProyectoSerializer, UsuarioProyectoSerializer,
-    DatosUsuarioSerializer, DatosFormularioUsuarioSerializer
+    DatosCorporalesSerializer, DatosHabitosSerializer
 )
 
 class RoleViewSet(viewsets.ModelViewSet):
@@ -20,6 +20,13 @@ class RoleViewSet(viewsets.ModelViewSet):
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
+    # permission_classes = [IsAuthenticated]
+
+
+
+class DatosPersonalesUsuarioViewSet(viewsets.ModelViewSet):
+    queryset = DatosPersonalesUsuario.objects.all()
+    serializer_class = DatosPersonalesUsuarioSerializer
     # permission_classes = [IsAuthenticated]
 
 
@@ -81,13 +88,13 @@ class EjercicioViewSet(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated]
 
 
-class DatosUsuarioViewSet(viewsets.ModelViewSet):
-    queryset = DatosUsuario.objects.all()
-    serializer_class = DatosUsuarioSerializer
+class DatosCorporalesViewSet(viewsets.ModelViewSet):
+    queryset = DatosCorporales.objects.all()
+    serializer_class = DatosCorporalesSerializer
     # permission_classes = [IsAuthenticated]
 
 
-class DatosFormularioUsuarioViewSet(viewsets.ModelViewSet):
-    queryset = DatosFormularioUsuario.objects.all()
-    serializer_class = DatosFormularioUsuarioSerializer
+class DatosHabitosViewSet(viewsets.ModelViewSet):
+    queryset = DatosHabitos.objects.all()
+    serializer_class = DatosHabitosSerializer
     # permission_classes = [IsAuthenticated]

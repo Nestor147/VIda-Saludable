@@ -1,8 +1,8 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 from .views import (
-    RoleViewSet, UsuarioViewSet, AlimentacionViewSet, AguaViewSet, EsperanzaViewSet, 
-    SolViewSet, AireViewSet, DormirViewSet, DespertarViewSet, EjercicioViewSet, ProyectoViewSet, UsuarioProyectoViewSet, DatosUsuarioViewSet, DatosFormularioUsuarioViewSet
+    RoleViewSet, UsuarioViewSet, DatosPersonalesUsuarioViewSet, AlimentacionViewSet, AguaViewSet, EsperanzaViewSet, 
+    SolViewSet, AireViewSet, DormirViewSet, DespertarViewSet, EjercicioViewSet, ProyectoViewSet, UsuarioProyectoViewSet, DatosCorporalesViewSet, DatosHabitosViewSet
 )
 from .health.viewindicatorhealthybyhabits import HealthIndicatorsAPIView
 from .health.viewindicatormainwithfinal import HealthIndicatorsComparisonAPIView
@@ -17,7 +17,7 @@ from .habits.viewhabitsbyuserall import UserHabitsAllAPIView
 router = DefaultRouter()
 router.register(r'roles', RoleViewSet)
 router.register(r'usuarios', UsuarioViewSet)
-
+router.register(r'usuarios-personales', DatosPersonalesUsuarioViewSet)
 router.register(r'alimentaciones', AlimentacionViewSet)
 router.register(r'aguas', AguaViewSet)
 router.register(r'esperanzas', EsperanzaViewSet)
@@ -28,8 +28,8 @@ router.register(r'despertares', DespertarViewSet)
 router.register(r'ejercicios', EjercicioViewSet)
 router.register(r'proyectos', ProyectoViewSet)
 router.register(r'usuario-proyectos', UsuarioProyectoViewSet)
-router.register(r'datos-usuario', DatosUsuarioViewSet)
-router.register(r'datos-formulario-usuario', DatosFormularioUsuarioViewSet)
+router.register(r'datos-corporales', DatosCorporalesViewSet)
+router.register(r'datos-habitos', DatosHabitosViewSet)
 
 urlpatterns = [
 

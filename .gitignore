@@ -1,6 +1,5 @@
-db.sqlite3
-virtual/
-*virtual/
+/db.sqlite3
+/virtual
 
 
-__pycache__
+
