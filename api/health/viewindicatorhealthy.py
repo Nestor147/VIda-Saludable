@@ -3,33 +3,23 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.db.models import Avg
 from decimal import Decimal
-from ..models import Proyecto, UsuarioProyecto, DatosCorporales, DatosPersonalesUsuario
+from ..models import DatosCorporales, DatosPersonalesUsuario
 from ..serializers import DatosCorporalesSerializer
 from .analizadorsalud import AnalizadorSalud
 from statistics import mean
 
-class IndicadoresSaludPorProyectoView(APIView):
+class IndicadoresSaludPorUsuarioView(APIView):
 
-    def get(self, request, proyecto_id, *args, **kwargs):
-        # Verificar si el proyecto existe
-        if not Proyecto.objects.filter(id=proyecto_id).exists():
-            return Response({"detail": "El proyecto no existe."}, status=status.HTTP_404_NOT_FOUND)
+    def get(self, request, usuario_id, *args, **kwargs):
+        # Obtener los datos corporales y datos personales del usuario específico
+        datos_corporales = DatosCorporales.objects.filter(usuario_id=usuario_id, tipo='inicial').select_related('usuario')
+        datos_personales = DatosPersonalesUsuario.objects.filter(usuario_id=usuario_id).select_related('usuario')
 
-        # Obtener los usuarios asociados al proyecto
-        usuario_proyectos = UsuarioProyecto.objects.filter(proyecto_id=proyecto_id)
-        usuarios_ids = usuario_proyectos.values_list('usuario_id', flat=True)
+        # Verificar si se encontraron datos para el usuario
+        if not datos_corporales.exists() or not datos_personales.exists():
+            return Response({"detail": "No se encontraron datos corporales o personales para este usuario."}, status=status.HTTP_404_NOT_FOUND)
 
-        if not usuarios_ids:
-            return Response({"detail": "No se encontraron usuarios para este proyecto."}, status=status.HTTP_404_NOT_FOUND)
-
-        # Obtener los datos corporales y datos personales de los usuarios asociados al proyecto
-        datos = DatosCorporales.objects.filter(usuario_id__in=usuarios_ids, tipo='inicial').select_related('usuario')
-        datos_personales = DatosPersonalesUsuario.objects.filter(usuario_id__in=usuarios_ids).select_related('usuario')
-
-        if not datos.exists() or not datos_personales.exists():
-            return Response({"detail": "No se encontraron datos corporales o personales para los usuarios del proyecto."}, status=status.HTTP_404_NOT_FOUND)
-
-        # Crear un diccionario para acceder fácilmente al sexo de cada usuario
+        # Crear un diccionario para acceder fácilmente al sexo del usuario
         sexo_usuario = {dato.usuario_id: dato.sexo for dato in datos_personales}
 
         # Inicializar acumuladores para los promedios
@@ -59,7 +49,7 @@ class IndicadoresSaludPorProyectoView(APIView):
             'resultado_test_rufier': [],
         }
 
-        for dato in datos:
+        for dato in datos_corporales:
             usuario_id = dato.usuario_id
             sexo = sexo_usuario.get(usuario_id, 'M')  # Por defecto 'M' si no se encuentra el sexo
 
@@ -103,14 +93,20 @@ class IndicadoresSaludPorProyectoView(APIView):
                 else:
                     promedios[clave] = None
 
-        # Construir los resultados
+        # Construir los resultados eliminando "M" o "F" si no son necesarios
         resultados = {}
         for clave, promedio in promedios.items():
             if clave in ['radio_abdominal', 'grasa_corporal', 'colesterol_hdl', 'porcentaje_musculo']:
-                resultados[clave] = {
-                    'M': {'promedio': promedio.get('M', None), 'status': getattr(AnalizadorSalud, f'clasificar_{clave}')(promedio.get('M', None), 'M')},
-                    'F': {'promedio': promedio.get('F', None), 'status': getattr(AnalizadorSalud, f'clasificar_{clave}')(promedio.get('F', None), 'F')},
-                }
+                if promedios[clave]['M'] is not None:
+                    resultados[clave] = {
+                        'promedio': promedios[clave]['M'],
+                        'status': getattr(AnalizadorSalud, f'clasificar_{clave}')(promedios[clave]['M'], 'M')
+                    }
+                elif promedios[clave]['F'] is not None:
+                    resultados[clave] = {
+                        'promedio': promedios[clave]['F'],
+                        'status': getattr(AnalizadorSalud, f'clasificar_{clave}')(promedios[clave]['F'], 'F')
+                    }
             else:
                 resultados[clave] = {
                     'promedio': promedio,

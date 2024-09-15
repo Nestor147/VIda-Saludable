@@ -4,13 +4,15 @@ class AnalizadorSalud:
     
     @staticmethod
     def clasificar_peso(peso):
-        if peso < Decimal('45'):
+        if isinstance(peso, Decimal):
+            peso = float(peso)
+        if peso < Decimal(45):
             return 'Muy bajo'
-        elif Decimal('45') <= peso < Decimal('60'):
+        elif Decimal(45) <= peso < Decimal(60):
             return 'Bajo'
-        elif Decimal('60') <= peso < Decimal('80'):
+        elif Decimal(60) <= peso < Decimal(80):
             return 'Normal'
-        elif Decimal('80') <= peso < Decimal('100'):
+        elif Decimal(80) <= peso < Decimal(100):
             return 'Sobrepeso'
         else:
             return 'Obesidad'
@@ -62,24 +64,35 @@ class AnalizadorSalud:
 
     @staticmethod
     def clasificar_radio_abdominal(radio_abdominal, sexo):
+        if radio_abdominal is None:
+            return 'Sin datos'
+
         if radio_abdominal > (Decimal('0.85') if sexo == 'F' else Decimal('0.9')):
             return 'Malo'
         else:
             return 'Bueno'
 
-    @staticmethod
-    def clasificar_grasa_corporal(imc, edad, sexo):
-        edad_decimal = Decimal(edad)
 
-        grasa_corporal = (Decimal('1.20') * imc) + (Decimal('0.23') * edad_decimal) - (Decimal('16.2') if sexo == 'M' else Decimal('5.4'))
-        if grasa_corporal > (Decimal('25') if sexo == 'M' else Decimal('32')):
-            return 'Malo'
-        elif Decimal('18') <= grasa_corporal <= Decimal('24') if sexo == 'M' else Decimal('25') <= grasa_corporal <= Decimal('31'):
-            return 'Bueno'
-        elif Decimal('14') <= grasa_corporal <= Decimal('17') if sexo == 'M' else Decimal('21') <= grasa_corporal <= Decimal('24'):
-            return 'Muy bueno'
+    @staticmethod
+    def clasificar_grasa_corporal(grasa, sexo):
+        if grasa is None:
+            return 'Sin datos'
+        if sexo == 'M':
+            if grasa < 15:
+                return 'Bajo'
+            elif 15 <= grasa < 25:
+                return 'Normal'
+            else:
+                return 'Alto'
+        elif sexo == 'F':
+            if grasa < 20:
+                return 'Bajo'
+            elif 20 <= grasa < 30:
+                return 'Normal'
+            else:
+                return 'Alto'
         else:
-            return 'Excelente'
+            return 'Desconocido'
 
     @staticmethod
     def clasificar_grasa_visceral(grasa_visceral):
@@ -125,6 +138,8 @@ class AnalizadorSalud:
 
     @staticmethod
     def clasificar_colesterol_hdl(colesterol_hdl, sexo):
+        if colesterol_hdl is None:
+            return 'Sin datos'
         if colesterol_hdl < (40 if sexo == 'M' else 50):
             return 'Malo'
         else:
@@ -160,7 +175,7 @@ class AnalizadorSalud:
             return 'Normal'
     
     @staticmethod
-    def clasificar_frecuencia_cardiaca_reposo(frecuencia_cardiaca_reposo):
+    def clasificar_frecuencia_cardiaca_en_reposo(frecuencia_cardiaca_reposo):
         if frecuencia_cardiaca_reposo > 100:
             return 'Mala'
         elif 80 <= frecuencia_cardiaca_reposo <= 100:
@@ -171,7 +186,7 @@ class AnalizadorSalud:
             return 'Muy buena'
     
     @staticmethod
-    def clasificar_frecuencia_cardiaca_45_segundos(frecuencia_cardiaca_45_segundos):
+    def clasificar_frecuencia_cardiaca_despues_de_45_segundos(frecuencia_cardiaca_45_segundos):
         if frecuencia_cardiaca_45_segundos > 140:
             return 'Mala'
         elif 121 <= frecuencia_cardiaca_45_segundos <= 140:
@@ -182,7 +197,7 @@ class AnalizadorSalud:
             return 'Muy buena'
     
     @staticmethod
-    def clasificar_frecuencia_cardiaca_1_minuto(frecuencia_cardiaca_1_minuto):
+    def clasificar_frecuencia_cardiaca_1_minuto_despues(frecuencia_cardiaca_1_minuto):
         if frecuencia_cardiaca_1_minuto > 100:
             return 'Mala'
         elif 80 <= frecuencia_cardiaca_1_minuto <= 100:
@@ -193,12 +208,7 @@ class AnalizadorSalud:
             return 'Muy buena'
     
     @staticmethod
-    def clasificar_resultado_test_rufier(frecuencia_cardiaca_en_reposo, frecuencia_cardiaca_45_segundos, frecuencia_cardiaca_1_minuto):
-        resultados_test = (
-            ( Decimal(frecuencia_cardiaca_en_reposo) + 
-            Decimal(frecuencia_cardiaca_45_segundos) + 
-            Decimal(frecuencia_cardiaca_1_minuto)) - 200
-        ) / Decimal('10')
+    def clasificar_resultado_test_rufier(resultados_test):
 
         if resultados_test > 15:
             return 'Muy malo'
@@ -210,3 +220,63 @@ class AnalizadorSalud:
             return 'Bueno'
         else:  # resultados_test < 0
             return 'Excelente'
+    
+    # Métodos adicionales:
+    
+    @staticmethod
+    def clasificar_temperatura(temperatura):
+        if temperatura > 37.5:
+            return 'Fiebre'
+        elif 36.5 <= temperatura <= 37.5:
+            return 'Normal'
+        else:
+            return 'Hipotermia'
+    
+    @staticmethod
+    def clasificar_saturacion_oxigeno(saturacion_oxigeno):
+        if saturacion_oxigeno < 90:
+            return 'Bajo'
+        elif 90 <= saturacion_oxigeno <= 95:
+            return 'Aceptable'
+        else:
+            return 'Normal'
+    
+    @staticmethod
+    def clasificar_porcentaje_musculo(porcentaje, sexo):
+        # Implementa la lógica de clasificación aquí
+        if porcentaje is None:
+            return 'Sin datos'
+        if sexo == 'M':
+            if porcentaje < 40:
+                return 'Bajo'
+            elif 40 <= porcentaje < 50:
+                return 'Normal'
+            else:
+                return 'Alto'
+        elif sexo == 'F':
+            if porcentaje < 30:
+                return 'Bajo'
+            elif 30 <= porcentaje < 40:
+                return 'Normal'
+            else:
+                return 'Alto'
+        else:
+            return 'Desconocido'
+    
+    @staticmethod
+    def clasificar_glicemia_basal(glicemia_basal):
+        if glicemia_basal > 100:
+            return 'Elevado'
+        elif 70 <= glicemia_basal <= 100:
+            return 'Normal'
+        else:
+            return 'Bajo'
+    
+    @staticmethod
+    def clasificar_vitalidad(vitalidad):
+        if vitalidad < 50:
+            return 'Bajo'
+        elif 50 <= vitalidad <= 75:
+            return 'Normal'
+        else:
+            return 'Alto'
