@@ -14,14 +14,14 @@ class HabitosAPIView(APIView):
 
         # Obtener los registros del usuario en el rango de fechas
         modelos = {
-            'alimentacion': Alimentacion.objects.filter(user_id=usuario_id, fecha__range=[start_date, end_date]),
-            'agua': Agua.objects.filter(user_id=usuario_id, fecha__range=[start_date, end_date]),
-            'esperanza': Esperanza.objects.filter(user_id=usuario_id, fecha__range=[start_date, end_date]),
-            'sol': Sol.objects.filter(user_id=usuario_id, fecha__range=[start_date, end_date]),
-            'aire': Aire.objects.filter(user_id=usuario_id, fecha__range=[start_date, end_date]),
-            'dormir': Dormir.objects.filter(user_id=usuario_id, fecha__range=[start_date, end_date]),
-            'despertar': Despertar.objects.filter(user_id=usuario_id, fecha__range=[start_date, end_date]),
-            'ejercicio': Ejercicio.objects.filter(user_id=usuario_id, fecha__range=[start_date, end_date]),
+            'alimentacion': Alimentacion.objects.filter(usuario_id=usuario_id, fecha__range=[start_date, end_date]),
+            'agua': Agua.objects.filter(usuario_id=usuario_id, fecha__range=[start_date, end_date]),
+            'esperanza': Esperanza.objects.filter(usuario_id=usuario_id, fecha__range=[start_date, end_date]),
+            'sol': Sol.objects.filter(usuario_id=usuario_id, fecha__range=[start_date, end_date]),
+            'aire': Aire.objects.filter(usuario_id=usuario_id, fecha__range=[start_date, end_date]),
+            'dormir': Dormir.objects.filter(usuario_id=usuario_id, fecha__range=[start_date, end_date]),
+            'despertar': Despertar.objects.filter(usuario_id=usuario_id, fecha__range=[start_date, end_date]),
+            'ejercicio': Ejercicio.objects.filter(usuario_id=usuario_id, fecha__range=[start_date, end_date]),
         }
 
         # Crear DataFrame con los datos clasificados

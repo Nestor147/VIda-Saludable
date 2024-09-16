@@ -11,15 +11,16 @@ class CorrelationView(APIView):
         # Obtén las variables a comparar desde los parámetros GET de la solicitud
         variable_x = request.GET.get('variable_x')
         variable_y = request.GET.get('variable_y')
+        tipo_datos = request.GET.get('tipo', 'inicial')  # por defecto, toma los datos 'iniciales'
 
         # Verifica si ambos parámetros están presentes
         if not variable_x or not variable_y:
             return Response({"error": "Faltan parámetros 'variable_x' o 'variable_y'."}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            # Obtén los datos de las dos tablas en función de las variables proporcionadas
-            datos_corporales = DatosCorporales.objects.all().values(variable_x, 'usuario')
-            datos_habitos = DatosHabitos.objects.all().values(variable_y, 'usuario')
+            # Obtén los datos de las dos tablas en función de las variables proporcionadas y filtra por el tipo (inicial/final)
+            datos_corporales = DatosCorporales.objects.filter(tipo=tipo_datos).values(variable_x, 'usuario')
+            datos_habitos = DatosHabitos.objects.filter(tipo=tipo_datos).values(variable_y, 'usuario')
         except DatosCorporales.DoesNotExist:
             return Response({"error": "Datos corporales no encontrados."}, status=status.HTTP_404_NOT_FOUND)
         except DatosHabitos.DoesNotExist:
@@ -85,6 +86,7 @@ class CorrelationView(APIView):
         response_data = {
             "variable_x": variable_x,
             "variable_y": variable_y,
+            "tipo": tipo_datos,  # Incluye el tipo en la respuesta
             "detailed_results": correlations
         }
 

@@ -97,12 +97,30 @@ class DatosHabitosSerializer(serializers.ModelSerializer):
 
 
 
+
+class UsuarioPersonalizadoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Usuario
+        fields = ['id', 'correo']  # Campos personalizados del usuario
+
+class DatosPersonalesUsuarioPersonalizadoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DatosPersonalesUsuario
+        fields = ['id', 'nombres_apellidos', 'sexo', 'edad', 'telefono', 'estado_civil']  # Campos personalizados de datos personales
+
 class UsuarioWithRoleSerializer(serializers.ModelSerializer):
     role_name = serializers.SerializerMethodField()
+    datos_personales = serializers.SerializerMethodField()  # Cambiado a SerializerMethodField
 
     class Meta:
         model = Usuario
-        fields = ['id', 'name', 'last_name', 'phone', 'email', 'password','role_name']  # Incluye los campos que necesitas
+        fields = ['id', 'correo', 'role_name', 'datos_personales']  # Ajustado para reflejar los campos correctos
 
     def get_role_name(self, obj):
         return obj.role.name if obj.role else None
+
+    def get_datos_personales(self, obj):
+        datos_personales = DatosPersonalesUsuario.objects.filter(usuario=obj).first()
+        if datos_personales:
+            return DatosPersonalesUsuarioPersonalizadoSerializer(datos_personales).data
+        return None

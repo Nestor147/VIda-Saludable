@@ -10,7 +10,7 @@ class GetDatesByIdView(APIView):
         usuario_id = self.kwargs.get('usuario_id')
 
         # Obtener las fechas mínimas y máximas para el hábito de alimentación del usuario
-        fechas = Alimentacion.objects.filter(user_id=usuario_id).aggregate(
+        fechas = Alimentacion.objects.filter(usuario_id=usuario_id).aggregate(
             primera_fecha=Min('fecha'), ultima_fecha=Max('fecha')
         )
 

@@ -12,14 +12,14 @@ class UserHabitsAllAPIView(APIView):
 
         # Obtener los registros del usuario desde el primer día hasta el último registro
         modelos = {
-            'alimentacion': Alimentacion.objects.filter(user_id=usuario_id).order_by('fecha'),
-            'agua': Agua.objects.filter(user_id=usuario_id).order_by('fecha'),
-            'esperanza': Esperanza.objects.filter(user_id=usuario_id).order_by('fecha'),
-            'sol': Sol.objects.filter(user_id=usuario_id).order_by('fecha'),
-            'aire': Aire.objects.filter(user_id=usuario_id).order_by('fecha'),
-            'dormir': Dormir.objects.filter(user_id=usuario_id).order_by('fecha'),
-            'despertar': Despertar.objects.filter(user_id=usuario_id).order_by('fecha'),
-            'ejercicio': Ejercicio.objects.filter(user_id=usuario_id).order_by('fecha'),
+            'alimentacion': Alimentacion.objects.filter(usuario_id=usuario_id).order_by('fecha'),
+            'agua': Agua.objects.filter(usuario_id=usuario_id).order_by('fecha'),
+            'esperanza': Esperanza.objects.filter(usuario_id=usuario_id).order_by('fecha'),
+            'sol': Sol.objects.filter(usuario_id=usuario_id).order_by('fecha'),
+            'aire': Aire.objects.filter(usuario_id=usuario_id).order_by('fecha'),
+            'dormir': Dormir.objects.filter(usuario_id=usuario_id).order_by('fecha'),
+            'despertar': Despertar.objects.filter(usuario_id=usuario_id).order_by('fecha'),
+            'ejercicio': Ejercicio.objects.filter(usuario_id=usuario_id).order_by('fecha'),
         }
 
         # Encuentra el tamaño mínimo común para las listas
